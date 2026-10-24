@@ -1,5 +1,5 @@
 <template>
-	<Sidebar class="invisible sm:visible" side="left" collapsible="icon">
+	<Sidebar class="invisible sm:visible" side="left">
 		<!-- Sidebar Title -->
 		<SidebarHeader>
 			<div>Money Manager</div>
@@ -12,9 +12,12 @@
 			<SidebarGroup>
 				<SidebarGroupContent>
 					<SidebarMenu>
-						<SidebarMenuItem v-for="item in sidebarMenuItems" :key="item.title">
+						<SidebarMenuItem
+							v-for="item in viewNavigationItems"
+							:key="item.title"
+						>
 							<SidebarMenuButton as-child>
-								<RouterLink :to="{ name: item.pathName }">
+								<RouterLink :to="item.to">
 									<component :is="item.icon" />
 									{{ item.title }}
 								</RouterLink>
@@ -28,9 +31,9 @@
 		<SidebarFooter>
 			<SidebarMenuItem>
 				<SidebarMenuButton as-child>
-					<RouterLink :to="{ name: 'auth' }">
-						<RiLogoutBoxLine />
-						<span>Log Out</span>
+					<RouterLink :to="logoutNavItem.to">
+						<component :is="logoutNavItem.icon" />
+						<span>{{ logoutNavItem.title }}</span>
 					</RouterLink>
 				</SidebarMenuButton>
 			</SidebarMenuItem>
@@ -50,25 +53,8 @@ import {
 	SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import Separator from '@/components/ui/separator/Separator.vue';
-import { RiDashboardLine, RiLogoutBoxLine } from '@remixicon/vue';
 
-const sidebarMenuItems = [
-	{
-		title: 'Dashboard',
-		icon: RiDashboardLine,
-		pathName: 'dashboard',
-	},
-	{
-		title: 'Dashboard',
-		icon: RiDashboardLine,
-		pathName: 'dashboard',
-	},
-	{
-		title: 'Dashboard',
-		icon: RiDashboardLine,
-		pathName: 'dashboard',
-	},
-];
+import { viewNavigationItems, logoutNavItem } from './navigation-config.ts';
 </script>
 
 <style scoped></style>
