@@ -14,6 +14,21 @@ const routes: RouteRecordRaw[] = [
 				name: 'dashboard',
 				component: () => import('@/views/DashboardView.vue'),
 			},
+			{
+				path: '/accounts',
+				name: 'accounts',
+				component: () => import('@/views/AccountsView.vue'),
+			},
+			{
+				path: '/budget',
+				name: 'budget',
+				component: () => import('@/views/BudgetView.vue'),
+			},
+			{
+				path: '/reports',
+				name: 'reports',
+				component: () => import('@/views/ReportsView.vue'),
+			},
 		],
 		meta: {
 			auth: true,
