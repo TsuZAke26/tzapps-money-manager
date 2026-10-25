@@ -1,5 +1,7 @@
 import type { Component } from 'vue';
 
+import { supabase } from '@/lib/supabase/clients';
+
 import {
 	RiBankLine,
 	RiDashboardLine,
@@ -15,6 +17,7 @@ export interface NavigationItem {
 		name: string;
 		params?: Record<string, string | number>;
 	};
+	handleClick?: Function;
 }
 
 export const viewNavigationItems: NavigationItem[] = [
@@ -44,4 +47,15 @@ export const logoutNavItem: NavigationItem = {
 	title: 'Logout',
 	icon: RiLogoutBoxLine,
 	to: { name: 'auth' },
+	handleClick: async () => {
+		try {
+			const { error: signOutError } = await supabase.auth.signOut();
+
+			if (signOutError) {
+				throw signOutError;
+			}
+		} catch (error) {
+			console.error('Error signing out: ', error);
+		}
+	},
 };
