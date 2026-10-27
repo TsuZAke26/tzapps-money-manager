@@ -28,15 +28,22 @@
 			</SidebarGroup>
 		</SidebarContent>
 
+		<!-- Sidebar footer content -->
 		<SidebarFooter>
-			<SidebarMenuItem>
-				<SidebarMenuButton as-child>
-					<RouterLink :to="logoutNavItem.to">
-						<component :is="logoutNavItem.icon" />
-						<span>{{ logoutNavItem.title }}</span>
-					</RouterLink>
-				</SidebarMenuButton>
-			</SidebarMenuItem>
+			<SidebarGroup>
+				<SidebarGroupContent>
+					<SidebarMenu>
+						<SidebarMenuItem>
+							<SidebarMenuButton @click="logoutNavItem.handleClick" as-child>
+								<div class="cursor-pointer">
+									<component :is="logoutNavItem.icon" />
+									<span>{{ logoutNavItem.title }}</span>
+								</div>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+				</SidebarGroupContent>
+			</SidebarGroup>
 		</SidebarFooter>
 	</Sidebar>
 </template>
