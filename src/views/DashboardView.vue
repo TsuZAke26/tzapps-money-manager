@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-row min-h-screen justify-center items-center">
+	<div class="min-h-screen p-4">
 		<Suspense>
 			<DashboardRenderer />
 			<template #fallback>Dashboard View</template>
