@@ -1,10 +1,6 @@
-import {
-	createWebHistory,
-	createRouter,
-	type RouteRecordRaw,
-} from 'vue-router';
+import { type RouteRecordRaw } from 'vue-router';
 
-const routes: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		component: () => import('@/layouts/MainLayout.vue'),
@@ -46,8 +42,3 @@ const routes: RouteRecordRaw[] = [
 		],
 	},
 ];
-
-export const router = createRouter({
-	history: createWebHistory(),
-	routes,
-});

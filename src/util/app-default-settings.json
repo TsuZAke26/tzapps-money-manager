@@ -1,0 +1,56 @@
+{
+	"appearance": { "dark": false },
+	"financial": { "currencySymbol": "$" },
+	"budgets": {
+		"categories": {
+			"income": [
+				{
+					"category_type_group": "Income",
+					"categories": ["Paychecks", "Interest", "Other Income"]
+				}
+			],
+			"expenses": [
+				{
+					"category_type_group": "Fixed",
+					"categories": [
+						"Home",
+						"Home Insurance",
+						"Home Security",
+						"Car Payment",
+						"Car Insurance",
+						"Electric",
+						"Internet",
+						"Phone",
+						"Streaming",
+						"Fitness"
+					]
+				},
+				{
+					"category_type_group": "Flexible",
+					"categories": [
+						"Home Goods",
+						"Groceries",
+						"Restaurants",
+						"Gas",
+						"Pharmacy",
+						"Clothing",
+						"Self-Care",
+						"Entertainment",
+						"Debt Payments"
+					]
+				},
+				{
+					"category_type_group": "Non-Monthly",
+					"categories": [
+						"Car Maintenance",
+						"Health Visits",
+						"Shopping",
+						"Gifts",
+						"Vacation"
+					]
+				}
+			]
+		}
+	},
+	"reports": {}
+}

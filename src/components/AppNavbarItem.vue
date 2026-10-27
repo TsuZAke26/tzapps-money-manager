@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="h-full flex flex-col items-center justify-center cursor-pointer hover:bg-blue-300"
-		@click="handleClick(item.to)"
+		@click="handleClick"
 	>
 		<component :is="item.icon" class="h-6 w-6" />
 		<span class="text-xs font-bold">{{ item.title }}</span>
@@ -18,11 +18,12 @@ const props = defineProps<{
 
 const router = useRouter();
 
-const handleClick = (to: {
-	name: string;
-	params?: Record<string, string | number>;
-}) => {
-	router.push(to);
+const handleClick = () => {
+	if (props.item.handleClick) {
+		props.item.handleClick();
+	} else {
+		router.push(props.item.to);
+	}
 };
 </script>
 

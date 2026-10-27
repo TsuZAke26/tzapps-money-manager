@@ -1,8 +1,23 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 
 import './css/style.css';
-
-import { router } from '@/routes/routes';
 import App from './App.vue';
 
-createApp(App).use(router).mount('#app');
+import { supabase } from '@/lib/supabase/clients';
+import { router } from '@/routes';
+
+supabase.auth.onAuthStateChange((event) => {
+	if (event === 'SIGNED_IN') {
+		router.push({ name: 'dashboard' });
+	}
+
+	if (event === 'SIGNED_OUT') {
+		router.push({ name: 'auth' });
+	}
+});
+
+const app = createApp(App);
+const pinia = createPinia();
+
+app.use(pinia).use(router).mount('#app');
