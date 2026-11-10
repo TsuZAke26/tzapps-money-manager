@@ -62,6 +62,23 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+import { useForm } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/zod';
+import * as z from 'zod';
+
+const formSchema = toTypedSchema(
+	z.object({
+		email: z.email({ message: 'Invalid email address' }),
+		password: z
+			.string()
+			.min(10, { message: 'Password must be at least 10 characters' }),
+	})
+);
+
+const form = useForm({
+	validationSchema: formSchema,
+});
+
 const signInData = reactive({
 	email: '',
 	password: '',
