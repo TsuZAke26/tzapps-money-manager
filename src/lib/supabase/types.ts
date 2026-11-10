@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       accounts: {
         Row: {
+          account_category: Database["accounts"]["Enums"]["account_category"]
           account_type: Database["public"]["Enums"]["account_type"]
           balance: number
           created_at: string
@@ -26,6 +27,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          account_category?: Database["accounts"]["Enums"]["account_category"]
           account_type?: Database["public"]["Enums"]["account_type"]
           balance?: number
           created_at?: string
@@ -36,6 +38,7 @@ export type Database = {
           user_id?: string
         }
         Update: {
+          account_category?: Database["accounts"]["Enums"]["account_category"]
           account_type?: Database["public"]["Enums"]["account_type"]
           balance?: number
           created_at?: string
@@ -99,7 +102,11 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      account_category:
+        | "Checking"
+        | "Savings"
+        | "Credit Card"
+        | "Line of Credit"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -107,7 +114,73 @@ export type Database = {
   }
   budgets: {
     Tables: {
-      budget_categories: {
+      budget_category_plan: {
+        Row: {
+          actual_amount: number | null
+          budget_id: string
+          category_id: string
+          created_at: string
+          id: string
+          planned_amount: number
+        }
+        Insert: {
+          actual_amount?: number | null
+          budget_id: string
+          category_id: string
+          created_at?: string
+          id?: string
+          planned_amount?: number
+        }
+        Update: {
+          actual_amount?: number | null
+          budget_id?: string
+          category_id?: string
+          created_at?: string
+          id?: string
+          planned_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "budget_category_plan_budget_id_fkey"
+            columns: ["budget_id"]
+            isOneToOne: false
+            referencedRelation: "budgets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_category_plan_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      budgets: {
+        Row: {
+          budget_month: string
+          created_at: string
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          budget_month?: string
+          created_at?: string
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Update: {
+          budget_month?: string
+          created_at?: string
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      categories: {
         Row: {
           category_type: Database["budgets"]["Enums"]["budget_category_type"]
           category_type_group: string
@@ -124,7 +197,7 @@ export type Database = {
           id?: string
           name: string
           user_created?: boolean
-          user_id: string
+          user_id?: string
         }
         Update: {
           category_type?: Database["budgets"]["Enums"]["budget_category_type"]
@@ -136,44 +209,6 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
-      }
-      monthly_category_plan: {
-        Row: {
-          actual_amount: number | null
-          budget_month: string
-          category_id: string
-          created_at: string
-          id: string
-          planned_amount: number
-          user_id: string
-        }
-        Insert: {
-          actual_amount?: number | null
-          budget_month?: string
-          category_id: string
-          created_at?: string
-          id?: string
-          planned_amount?: number
-          user_id: string
-        }
-        Update: {
-          actual_amount?: number | null
-          budget_month?: string
-          category_id?: string
-          created_at?: string
-          id?: string
-          planned_amount?: number
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "monthly_category_plan_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "budget_categories"
-            referencedColumns: ["id"]
-          },
-        ]
       }
     }
     Views: {
@@ -388,7 +423,14 @@ export type CompositeTypes<
 
 export const Constants = {
   accounts: {
-    Enums: {},
+    Enums: {
+      account_category: [
+        "Checking",
+        "Savings",
+        "Credit Card",
+        "Line of Credit",
+      ],
+    },
   },
   budgets: {
     Enums: {
